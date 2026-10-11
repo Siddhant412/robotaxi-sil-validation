@@ -1,0 +1,48 @@
+name: Local SIL validation
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  fast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.lock
+      - run: python -m lab doctor
+      - run: pytest tests/unit tests/integration --junitxml=artifacts/fast.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fast-evidence
+          path: artifacts/
+  sil:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.lock
+      - run: playwright install --with-deps chromium
+      - run: pytest tests/sil -m critical --junitxml=artifacts/sil.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sil-evidence
+          path: artifacts/
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.lock
+      - run: playwright install --with-deps chromium
+      - run: pytest tests/ui --junitxml=artifacts/browser.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-evidence
+          path: artifacts/

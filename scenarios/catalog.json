@@ -1,0 +1,673 @@
+{
+  "schema_version": 1,
+  "required": [
+    {
+      "id": "test_T01_full_ride",
+      "cell": "T01",
+      "requirements": [
+        "R04",
+        "R05",
+        "R06",
+        "R14"
+      ],
+      "critical": true,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T01 full ride",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T02_duplicate_request",
+      "cell": "T02",
+      "requirements": [
+        "R01",
+        "R02"
+      ],
+      "critical": true,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T02 duplicate request",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T03_assignment_concurrency",
+      "cell": "T03",
+      "requirements": [
+        "R02"
+      ],
+      "critical": false,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T03 assignment concurrency",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T04_cancel_approaching",
+      "cell": "T04",
+      "requirements": [
+        "R11"
+      ],
+      "critical": true,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T04 cancel approaching",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T05_stale_assignment",
+      "cell": "T05",
+      "requirements": [
+        "R03",
+        "R11"
+      ],
+      "critical": true,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T05 stale assignment",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T06_duplicate_ack_loss",
+      "cell": "T06",
+      "requirements": [
+        "R07"
+      ],
+      "critical": false,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T06 duplicate ack loss",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T07_reordered_events",
+      "cell": "T07",
+      "requirements": [
+        "R04"
+      ],
+      "critical": true,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T07 reordered events",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T08_partition",
+      "cell": "T08",
+      "requirements": [
+        "R09",
+        "R12"
+      ],
+      "critical": true,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T08 partition",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T09_backend_restart",
+      "cell": "T09",
+      "requirements": [
+        "R08"
+      ],
+      "critical": true,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T09 backend restart",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T10_agent_restart_tombstone",
+      "cell": "T10",
+      "requirements": [
+        "R03",
+        "R07"
+      ],
+      "critical": false,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T10 agent restart tombstone",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T11_pickup_change",
+      "cell": "T11",
+      "requirements": [
+        "R05",
+        "R10"
+      ],
+      "critical": false,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T11 pickup change",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T12_duplicate_completion",
+      "cell": "T12",
+      "requirements": [
+        "R06"
+      ],
+      "critical": true,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T12 duplicate completion",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T13_stale_operator",
+      "cell": "T13",
+      "requirements": [
+        "R13"
+      ],
+      "critical": false,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T13 stale operator",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T14_old_lease",
+      "cell": "T14",
+      "requirements": [
+        "R03",
+        "R12"
+      ],
+      "critical": false,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T14 old lease",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T15_cancel_boarding_race",
+      "cell": "T15",
+      "requirements": [
+        "R04",
+        "R05",
+        "R11"
+      ],
+      "critical": false,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T15 cancel boarding race",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T15_cancel_after_boarding",
+      "cell": "T15",
+      "requirements": [
+        "R04",
+        "R05",
+        "R11"
+      ],
+      "critical": false,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T15 cancel after boarding",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T16_simulator_exit",
+      "cell": "T16",
+      "requirements": [
+        "R14"
+      ],
+      "critical": false,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "T16 simulator exit",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_UI_normal",
+      "cell": "test_UI_normal",
+      "requirements": [
+        "R04",
+        "R09"
+      ],
+      "critical": true,
+      "seed": 42,
+      "bounds": {
+        "browser_expect_wall_seconds": 5
+      },
+      "artifacts": [
+        "ui.png",
+        "browser-trace.zip"
+      ]
+    },
+    {
+      "id": "test_UI_cancel_pending_confirmed",
+      "cell": "test_UI_cancel_pending_confirmed",
+      "requirements": [
+        "R11"
+      ],
+      "critical": true,
+      "seed": 42,
+      "bounds": {
+        "browser_expect_wall_seconds": 5
+      },
+      "artifacts": [
+        "ui.png",
+        "browser-trace.zip"
+      ]
+    },
+    {
+      "id": "test_UI_stale",
+      "cell": "test_UI_stale",
+      "requirements": [
+        "R09"
+      ],
+      "critical": true,
+      "seed": 42,
+      "bounds": {
+        "browser_expect_wall_seconds": 5
+      },
+      "artifacts": [
+        "ui.png",
+        "browser-trace.zip"
+      ]
+    },
+    {
+      "id": "test_UI_pickup_revision_operator",
+      "cell": "test_UI_pickup_revision_operator",
+      "requirements": [
+        "R10",
+        "R13"
+      ],
+      "critical": true,
+      "seed": 42,
+      "bounds": {
+        "browser_expect_wall_seconds": 5
+      },
+      "artifacts": [
+        "ui.png",
+        "browser-trace.zip"
+      ]
+    },
+    {
+      "id": "test_HTTP_validation_and_idempotency_scope",
+      "cell": "test_HTTP_validation_and_idempotency_scope",
+      "requirements": [
+        "R01"
+      ],
+      "critical": true,
+      "seed": 42,
+      "bounds": {
+        "browser_expect_wall_seconds": 5
+      },
+      "artifacts": [
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_HTTP_walking_constraint",
+      "cell": "test_HTTP_walking_constraint",
+      "requirements": [
+        "R10"
+      ],
+      "critical": true,
+      "seed": 42,
+      "bounds": {
+        "browser_expect_wall_seconds": 5
+      },
+      "artifacts": [
+        "result.json"
+      ]
+    },
+    {
+      "id": "test_T08_partition_cancel",
+      "cell": "T08",
+      "requirements": [
+        "R09",
+        "R12"
+      ],
+      "critical": true,
+      "seed": 42,
+      "preconditions": "isolated one-vehicle SUMO episode, durable databases empty",
+      "stimulus": "cancel while delivery is partitioned; restore after lease expiry",
+      "fault_boundary": "agent/backend HTTP via relay, except explicit process and simulator exit cases",
+      "bounds": {
+        "ride_steps": 220,
+        "holding_steps": 160,
+        "lease_seconds": 12,
+        "freshness_seconds": 4,
+        "negative_interval_steps": 20
+      },
+      "forbidden": "terminal resurrection, duplicate completion, unobserved arrival, false infrastructure pass",
+      "artifacts": [
+        "configuration.json",
+        "samples.jsonl",
+        "timeline.json",
+        "relay.jsonl",
+        "agent.jsonl",
+        "backend.sqlite",
+        "agent.sqlite",
+        "sumo.log",
+        "result.json"
+      ]
+    }
+  ]
+}

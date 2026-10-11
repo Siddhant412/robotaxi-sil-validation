@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Ride validation lab</title>
+<style>body{font:17px system-ui;max-width:700px;margin:40px auto;padding:20px}button,input{font:inherit;margin:6px;padding:8px}#status{font-weight:bold}pre{white-space:pre-wrap;font-size:12px}</style>
+<h1>Local ride lab</h1><p>Synthetic passenger • one simulated taxi</p>
+<button id="request">Request A → D</button><button id="cancel" disabled>Cancel before boarding</button>
+<button id="ready" disabled>I am at the pickup</button>
+<p id="status">No request</p><p id="pickup"></p><p id="freshness">Vehicle status unknown</p><p id="error" role="alert"></p>
+<details open><summary>Local operator</summary><label>Reason <input id="reason" value="Pickup A occupied"></label>
+<button id="change" disabled>Select eligible pickup B (120 m walk)</button><button id="timeline">Show timeline</button><button id="incidents">Show exceptions</button><pre id="audit"></pre></details>
+<script>
+let rideId=null, revision=0, current=null;
+async function api(path,body){const opts=body?{method:'POST',headers:{'Content-Type':'application/json','Idempotency-Key':crypto.randomUUID()},body:JSON.stringify(body)}:{};
+const r=await fetch(path,opts);const d=await r.json();if(!r.ok)throw Error(d.detail||r.status);return d;}
+function render(r){if(r.ride_id!==rideId||r.server_revision<revision)return;revision=r.server_revision;current=r;
+const names={ASSIGNED:'Assigned',APPROACHING:'Approaching',READY_FOR_BOARDING:'Ready for boarding',IN_TRIP:'In trip',DROPOFF_READY:'Drop-off ready',COMPLETED:'Completed',CANCEL_REQUESTED:'Cancellation requested — awaiting vehicle confirmation',CANCELLED:'Cancelled — vehicle confirmed holding',FAILED:'Failed — review evidence'};
+document.querySelector('#status').textContent=names[r.state]||r.state;document.querySelector('#pickup').textContent='Pickup '+r.pickup+(r.passenger_ready?' — passenger ready':' — confirm arrival after walking');
+document.querySelector('#freshness').textContent=r.telemetry_fresh?'Vehicle status fresh':'Vehicle status stale / unknown — last position is not live';
+const pre=['ASSIGNED','APPROACHING','READY_FOR_BOARDING'].includes(r.state);document.querySelector('#cancel').disabled=!pre;document.querySelector('#change').disabled=!pre||r.pickup!=='A';document.querySelector('#ready').disabled=!pre||r.passenger_ready;}
+async function action(path,body){try{document.querySelector('#error').textContent='';await poll();body.expected_revision=revision;const r=await api(path,body);render(r);await poll();}catch(e){document.querySelector('#error').textContent=e.message;}}
+document.querySelector('#request').onclick=async()=>{document.querySelector('#status').textContent='Request pending';try{const r=await api('/rides',{});rideId=r.ride_id;revision=0;render(r);await poll();}catch(e){document.querySelector('#error').textContent=e.message;}};
+document.querySelector('#cancel').onclick=()=>action('/rides/'+rideId+'/cancel',{expected_revision:revision});
+document.querySelector('#change').onclick=()=>action('/rides/'+rideId+'/pickup',{expected_revision:revision,pickup:'B',operator:'local-demo',reason:document.querySelector('#reason').value});
+document.querySelector('#ready').onclick=()=>action('/rides/'+rideId+'/ready',{expected_revision:revision});
+document.querySelector('#timeline').onclick=async()=>{if(rideId)document.querySelector('#audit').textContent=JSON.stringify(await api('/rides/'+rideId+'/timeline'),null,2);};
+document.querySelector('#incidents').onclick=async()=>{document.querySelector('#audit').textContent=JSON.stringify(await api('/operations/incidents'),null,2);};
+async function poll(){if(!rideId)return;try{render(await api('/rides/'+rideId));}catch(e){document.querySelector('#freshness').textContent='Backend unavailable — vehicle status unknown';}}
+setInterval(poll,250);
+</script></html>

@@ -1,0 +1,9 @@
+{
+  "happy_path": "test_T01_full_ride",
+  "stale_assignment": "test_T05_stale_assignment",
+  "cancellation": "test_T04_cancel_approaching",
+  "partition": "test_T08_partition",
+  "pickup_change": "test_T11_pickup_change",
+  "backend_restart": "test_T09_backend_restart",
+  "agent_restart": "test_T10_agent_restart_tombstone"
+}

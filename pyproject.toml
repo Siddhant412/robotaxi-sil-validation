@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "robotaxi-sil-validation"
+version = "0.1.0"
+requires-python = ">=3.11,<3.13"
+dependencies = ["eclipse-sumo==1.28.0", "traci==1.28.0", "fastapi==0.143.0", "uvicorn==0.54.0", "httpx==0.28.1", "pytest==9.1.1", "playwright==1.63.0"]
+[tool.setuptools.packages.find]
+include = ["lab*", "validation*", "services*"]
+[tool.pytest.ini_options]
+pythonpath = ["."]
+markers = ["critical: initial critical acceptance gate"]
